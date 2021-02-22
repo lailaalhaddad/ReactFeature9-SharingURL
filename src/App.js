@@ -7,7 +7,7 @@ import {
   Title,
 } from "./styles";
 import React, { useState } from "react";
-
+import { Route, Switch } from "react-router";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 // Components
@@ -74,8 +74,15 @@ function App() {
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
-      <Home />
-      {setView()}
+      <Switch>
+        <Route path="/products">
+          <ProductList products={_products} deleteProduct={deleteProduct} />
+        </Route>
+        <Route exact path="/">
+          <Home />
+        </Route>
+      </Switch>
+      {/* {setView()} */}
     </ThemeProvider>
   );
 }
